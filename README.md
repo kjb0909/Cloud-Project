@@ -17,7 +17,8 @@ This document contains the following details:
 - How to Use the Ansible Build
 
 
-### Description of the Topology
+### Description of the Topology - The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
@@ -48,7 +49,7 @@ The machines on the internal network are not exposed to the public Internet.
 Only the jumpbox machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
 - _TODO: Add whitelisted IP addresses_ 75.118.203.288
 
-Machines within the network can only be accessed by _____.
+Machines within the network can only be accessed by Jumpbox Provisioner.
 - _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_Jumpbox PrivateIP:10.1.0.4 PublicIP:40.76.137.147
 
 A summary of the access policies in place can be found in the table below.
@@ -62,38 +63,46 @@ A summary of the access policies in place can be found in the table below.
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- _TODO: What is the main advantage of automating configuration with Ansible? There are several benefits of using Ansible, especially if you are handling multiple servers. Ansible allows you to configure a large amount of servers in a precise and fast fashion. Ansible is agentless, meaning that there’s no requirement for an agent to be installed on the server. It uses ssh and python to establish connections with the server instead. Because of this you are able to save a lot of space. This also leads to reduced latency. Ansible is also user-friendly, it uses YAML, making it easy to understand.
 
 The playbook implements the following tasks:
 - _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+•	Config Elk VM with Docker
+•	Install Docker.io
+•	Install Python-pip
+•	Increase Virtual Memory
+•	Download and launch ELK Docker container
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+
+![docker ps output](Diagrams/dockerps.png) 
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- _TODO: List the IP addresses of the machines you are monitoring 10.0.0.4, 10.0.0.5 and 10.0.0.6
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- _TODO: Specify which Beats you successfully installed - Filebeat and Metricbeat.
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+-  Filebeat monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or Logstash for indexing.
+- Metricbeat collects metric data from your target servers, this could be operating system metrics such as CPU or memory or data related to services running on the server. It can also be used to monitor other beats and ELK stack itself.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the config file to run playbook.
+- Update the ansible host file to include...
+- Run the playbook, and navigate to Jumpbox to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+_TODO: Answer the following questions to fill in the blanks:
+- _Which file is the playbook? Where do you copy it? - Elk-playbook.yml
+- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?
+Update the hosts file or the ansible.cfg.
+- _Which URL do you navigate to in order to check that the ELK server is running? http://thatdaysipaddress:5601/app/kibana
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
